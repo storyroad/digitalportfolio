@@ -699,14 +699,14 @@ export default function Home() {
               © 2025 Ketsia St-Louis Noel · Crafted with precision and purpose.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-[#775144] hover:text-[#2A0800] transition-colors">
+              <a 
+                href="https://www.linkedin.com/in/ketsias/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#775144] hover:text-[#2A0800] transition-colors"
+                data-testid="footer-linkedin"
+              >
                 <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-[#775144] hover:text-[#2A0800] transition-colors">
-                <Github className="h-5 w-5" />
-              </a>
-              <a href="mailto:ketsiasln@gmail.com" className="text-[#775144] hover:text-[#2A0800] transition-colors">
-                <Mail className="h-5 w-5" />
               </a>
             </div>
           </div>

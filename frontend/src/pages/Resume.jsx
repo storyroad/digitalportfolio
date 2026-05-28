@@ -112,7 +112,7 @@ const education = [
   { name: 'Strategic Marketing Management and Public Relations / Image Management', issuer: 'Toronto Metropolitan University (TMU)', year: '2023' },
   { name: 'Graphic Design Elements for Non-Designers Specialization', issuer: 'University of Colorado Boulder', year: '2021' },
   { name: 'ITIL Foundation', issuer: 'Global Knowledge', year: '2021' },
-  { name: 'Construction Management Specialization (Certificate Credits)', issuer: 'Columbia University', year: '' },
+  { name: 'Construction Management Specialization', issuer: 'Columbia University', year: '2026' },
   { name: 'Bachelor of Arts, Communication and Sociology', issuer: 'University of Ottawa', year: '2004 – 2008' }
 ];
 
@@ -152,7 +152,7 @@ export default function Resume() {
           transition={{ duration: 0.5 }}
         >
           {/* Resume Header */}
-          <div className="mb-12 pb-10 border-b border-[#BEA8A7]/30">
+          <div id="contact-info" className="mb-12 pb-10 border-b border-[#BEA8A7]/30 scroll-mt-24">
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-[#C09891] mb-3">Curriculum Vitae</p>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2A0800] tracking-tight mb-3 leading-[1.05]">
               Ketsia St-Louis Noel
@@ -315,11 +315,11 @@ export default function Resume() {
             </a>
             <Button
               variant="outline"
-              onClick={() => { navigate('/'); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 100); }}
+              onClick={() => document.getElementById('contact-info')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
               className="w-full sm:w-auto rounded-none border-2 border-[#2A0800] text-[#2A0800] hover:bg-[#2A0800] hover:text-white bg-transparent px-8 py-4 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
               data-testid="resume-contact-btn"
             >
-              Get in Touch
+              Contact
             </Button>
           </div>
         </motion.div>
