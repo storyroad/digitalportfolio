@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  ArrowRight, BarChart3, Mail, FileText, Users, AlertTriangle, 
+  ArrowRight, BarChart3, Mail, FileText, Users, Layers, 
   Sparkles, Workflow, CheckCircle2, Database, Bell, Calendar, 
   LineChart, FolderOpen, MessageSquare, Target, ClipboardList,
   Send, Github, Linkedin, MapPin, Code2, Briefcase, Languages,
@@ -19,12 +19,12 @@ const automations = [
     id: 'incident-ops',
     title: 'Incident Management Workflow',
     tagline: 'Turn urgent service interruptions into clear, coordinated, trackable action.',
-    icon: AlertTriangle,
+    icon: Layers,
     audience: 'IT teams, service desks, operations teams, government/enterprise environments',
     problem:
       'When incidents happen, updates can become scattered across emails, calls, tickets, spreadsheets, and chat threads. Leaders need reliable visibility while teams need a clear escalation path.',
     flow: [
-      { label: 'Incident Logged', icon: AlertTriangle, detail: 'Issue, impact, affected users, urgency' },
+      { label: 'Incident Logged', icon: Layers, detail: 'Issue, impact, affected users, urgency' },
       { label: 'Classify & Prioritize', icon: Target, detail: 'Severity, portfolio, client group, SLA risk' },
       { label: 'Notify Stakeholders', icon: Bell, detail: 'Email updates, bridge call notes, status summaries' },
       { label: 'Track Actions', icon: ClipboardList, detail: 'Owners, next steps, timeline, dependencies' },
@@ -154,13 +154,13 @@ function AutomationCard({ automation, active, onClick }) {
       whileTap={{ scale: 0.98 }}
       className={`w-full text-left rounded-2xl border p-5 transition-all duration-300 ${
         active 
-          ? 'border-amber-200 bg-amber-50/50 shadow-lg shadow-amber-100' 
-          : 'border-slate-200 bg-white hover:border-amber-100 hover:shadow-md'
+          ? 'border-blue-200 bg-blue-50/50 shadow-lg shadow-blue-100' 
+          : 'border-slate-200 bg-white hover:border-blue-100 hover:shadow-md'
       }`}
     >
       <div className="flex items-start gap-4">
         <div className={`rounded-xl p-3 ${
-          active ? 'bg-gradient-to-br from-amber-500 to-orange-500 text-white' : 'bg-slate-50 text-slate-700'
+          active ? 'bg-gradient-to-br from-blue-600 to-cyan-600 text-white' : 'bg-slate-50 text-slate-700'
         }`}>
           <Icon className="h-5 w-5" />
         </div>
@@ -185,7 +185,7 @@ function FlowStep({ step, index }) {
       <Card className="rounded-2xl h-full border-slate-200 bg-white shadow-sm hover:shadow-md transition-all duration-300">
         <CardContent className="p-5">
           <div className="flex items-center gap-3 mb-3">
-            <div className="rounded-xl bg-amber-50 p-2.5 text-amber-600">
+            <div className="rounded-xl bg-blue-50 p-2.5 text-blue-600">
               <StepIcon className="h-4 w-4" />
             </div>
             <span className="text-xs text-slate-500 font-medium">Step {index + 1}</span>
@@ -196,7 +196,7 @@ function FlowStep({ step, index }) {
       </Card>
       {index < 4 && (
         <div className="hidden lg:flex absolute top-1/2 -right-4 -translate-y-1/2 z-10 rounded-full bg-white border border-slate-200 p-1.5 shadow-sm">
-          <ArrowRight className="h-3.5 w-3.5 text-amber-500" />
+          <ArrowRight className="h-3.5 w-3.5 text-blue-600" />
         </div>
       )}
     </motion.div>
@@ -243,12 +243,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-amber-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
       {/* Decorative Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-amber-200/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 -left-40 w-96 h-96 bg-teal-200/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-orange-200/15 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 -left-40 w-96 h-96 bg-cyan-200/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-sky-200/15 rounded-full blur-3xl" />
       </div>
 
       {/* Header */}
@@ -259,7 +259,7 @@ export default function Home() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-2"
           >
-            <div className="rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 p-2.5">
+            <div className="rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 p-2.5">
               <Workflow className="h-5 w-5 text-white" />
             </div>
             <span className="font-bold text-lg text-slate-900">COMMARKAI</span>
@@ -285,7 +285,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50/50 px-4 py-2 text-sm font-medium text-amber-900 mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-2 text-sm font-medium text-blue-900 mb-8">
               <Sparkles className="h-4 w-4" />
               Automation Strategist & Operations Specialist
             </div>
@@ -298,7 +298,7 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Button 
                 onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 px-8 py-6 text-base font-semibold shadow-lg shadow-amber-200 transition-all duration-300"
+                className="rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-6 text-base font-semibold shadow-lg shadow-blue-200 transition-all duration-300"
               >
                 Let's Connect
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -388,7 +388,7 @@ export default function Home() {
                   <Card className="rounded-2xl border-slate-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300 h-full">
                     <CardContent className="p-6">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 p-2.5">
+                        <div className="rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 p-2.5">
                           <SkillIcon className="h-5 w-5 text-white" />
                         </div>
                         <h3 className="text-lg font-semibold text-slate-900">{skill.title}</h3>
@@ -418,7 +418,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50/50 px-4 py-2 text-sm font-medium text-amber-900 mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-2 text-sm font-medium text-blue-900 mb-6">
               <Workflow className="h-4 w-4" />
               Automation Portfolio
             </div>
@@ -453,7 +453,7 @@ export default function Home() {
               <Card className="rounded-3xl border-slate-200 bg-white shadow-xl">
                 <CardContent className="p-8">
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 p-4 text-white">
+                    <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 p-4 text-white">
                       <SelectedIcon className="h-7 w-7" />
                     </div>
                     <div className="flex-1">
@@ -511,7 +511,7 @@ export default function Home() {
               <Card className="rounded-2xl border-slate-200 bg-white shadow-sm">
                 <CardContent className="p-6 space-y-6">
                   <PillList title="Possible Tools & Integrations" items={selected.tools} />
-                  <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-5">
+                  <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-5">
                     <h4 className="font-semibold text-sm text-slate-900 mb-2">Why This Matters</h4>
                     <p className="text-sm text-slate-700 leading-relaxed">{selected.positioning}</p>
                   </div>
@@ -551,7 +551,7 @@ export default function Home() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="rounded-xl border-slate-300 focus:border-amber-500 focus:ring-amber-500"
+                      className="rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500"
                     />
                   </div>
                   <div>
@@ -565,7 +565,7 @@ export default function Home() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="rounded-xl border-slate-300 focus:border-amber-500 focus:ring-amber-500"
+                      className="rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500"
                     />
                   </div>
                   <div>
@@ -585,7 +585,7 @@ export default function Home() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 py-6 text-base font-semibold shadow-lg shadow-amber-200 transition-all duration-300"
+                    className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 py-6 text-base font-semibold shadow-lg shadow-blue-200 transition-all duration-300"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                     <Send className="ml-2 h-5 w-5" />
@@ -602,7 +602,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
-              <div className="rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 p-2.5">
+              <div className="rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 p-2.5">
                 <Workflow className="h-5 w-5 text-white" />
               </div>
               <span className="font-bold text-lg text-slate-900">COMMARKAI</span>
@@ -611,13 +611,13 @@ export default function Home() {
               © 2025 Ketsia St-Louis Noel. Crafted with precision and purpose.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-slate-600 hover:text-amber-600 transition-colors">
+              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-slate-600 hover:text-amber-600 transition-colors">
+              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">
                 <Github className="h-5 w-5" />
               </a>
-              <a href="#" className="text-slate-600 hover:text-amber-600 transition-colors">
+              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>

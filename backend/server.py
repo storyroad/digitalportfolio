@@ -1,7 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
@@ -10,14 +9,15 @@ from typing import List
 import uuid
 from datetime import datetime, timezone
 
+# Import database
+from database import db, close_db_connection
+
+# Import contact routes
+from routes import contact
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
-
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -69,6 +69,9 @@ async def get_status_checks():
 # Include the router in the main app
 app.include_router(api_router)
 
+# Include contact routes
+app.include_router(contact.router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
@@ -86,4 +89,4 @@ logger = logging.getLogger(__name__)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
-    client.close()
+    close_db_connection()

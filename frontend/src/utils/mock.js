@@ -1,47 +1,79 @@
-// Mock utility for handling contact form submissions
-// This simulates backend behavior until real API is integrated
+import { toast } from 'sonner';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 export const handleContactSubmit = async (formData) => {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  // Validate form data
-  if (!formData.name || !formData.email || !formData.message) {
+  try {
+    const response = await fetch(`${API}/contact`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to submit contact form');
+    }
+
+    const data = await response.json();
+    
+    return {
+      success: true,
+      data: data
+    };
+  } catch (error) {
+    console.error('Contact submission error:', error);
     return {
       success: false,
-      error: 'All fields are required'
+      error: error.message
     };
   }
-  
-  // Email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(formData.email)) {
-    return {
-      success: false,
-      error: 'Invalid email format'
-    };
-  }
-  
-  // Store in localStorage for demonstration
-  const submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
-  const newSubmission = {
-    ...formData,
-    id: Date.now(),
-    timestamp: new Date().toISOString()
-  };
-  submissions.push(newSubmission);
-  localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
-  
-  console.log('📧 Contact Form Submission (MOCK):', newSubmission);
-  
-  // Simulate successful submission
-  return {
-    success: true,
-    data: newSubmission
-  };
 };
 
-// Utility to retrieve all submissions (for testing)
-export const getContactSubmissions = () => {
-  return JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+// Utility to retrieve all submissions (for admin dashboard)
+export const getContactSubmissions = async () => {
+  try {
+    const response = await fetch(`${API}/contact`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch submissions');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching submissions:', error);
+    return [];
+  }
+};
+
+// Update submission status
+export const updateSubmissionStatus = async (submissionId, status) => {
+  try {
+    const response = await fetch(`${API}/contact/${submissionId}/status?status=${status}`, {
+      method: 'PATCH',
+    });
+    if (!response.ok) {
+      throw new Error('Failed to update status');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating status:', error);
+    return { success: false };
+  }
+};
+
+// Delete submission
+export const deleteSubmission = async (submissionId) => {
+  try {
+    const response = await fetch(`${API}/contact/${submissionId}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Failed to delete submission');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting submission:', error);
+    return { success: false };
+  }
 };
