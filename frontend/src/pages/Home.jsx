@@ -5,7 +5,7 @@ import {
   Sparkles, Workflow, CheckCircle2, Database, Bell, Calendar, 
   LineChart, FolderOpen, MessageSquare, Target, ClipboardList,
   Send, Github, Linkedin, MapPin, Code2, Briefcase, Languages,
-  ChevronDown
+  ChevronDown, Settings, ServerCog, GitBranch, Headphones
 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -14,6 +14,7 @@ import { Textarea } from '../components/ui/textarea';
 import { toast } from 'sonner';
 import { handleContactSubmit } from '../utils/mock';
 import N8NWorkflow from '../components/N8NWorkflow';
+import DetailedAutomations from '../components/DetailedAutomations';
 
 const automations = [
   {
@@ -36,6 +37,27 @@ const automations = [
     tools: ['ServiceNow / BMC / Jira', 'Outlook', 'SharePoint', 'Power BI', 'Teams / Slack', 'AI summarizer'],
     positioning:
       'Enterprise-grade thinking: pressure, clarity, communication, accountability, and measurable service delivery.',
+  },
+  {
+    id: 'service-management',
+    title: 'Service Management Workflow',
+    tagline: 'Streamline service requests, change management, and ongoing service delivery.',
+    icon: ServerCog,
+    audience: 'IT service teams, managed service providers, internal IT departments, enterprise operations',
+    problem:
+      'Service requests pile up in disconnected systems. Change approvals get stuck in email chains. SLAs slip without visibility. Teams need a unified workflow for service intake, fulfillment, and continuous improvement.',
+    flow: [
+      { label: 'Request Intake', icon: ClipboardList, detail: 'Service catalog, self-service portal, email, chat' },
+      { label: 'Categorize & Assign', icon: GitBranch, detail: 'Service type, priority, team routing, SLA mapping' },
+      { label: 'Approval Workflow', icon: CheckCircle2, detail: 'Change advisory board, stakeholder sign-off, risk assessment' },
+      { label: 'Fulfill & Update', icon: Settings, detail: 'Task execution, status updates, user communication, documentation' },
+      { label: 'Review & Optimize', icon: LineChart, detail: 'SLA performance, satisfaction surveys, process improvements' },
+    ],
+    kpis: ['SLA compliance', 'First-call resolution', 'Request volume', 'Change success rate', 'Customer satisfaction (CSAT)'],
+    outputs: ['Service catalog updates', 'Change calendar', 'SLA dashboard', 'CSAT reports', 'Knowledge base articles'],
+    tools: ['ServiceNow', 'Jira Service Management', 'Freshservice', 'SharePoint', 'Power BI', 'Microsoft Teams'],
+    positioning:
+      'Demonstrates mastery of structured service delivery — balancing speed, governance, and continuous improvement.',
   },
   {
     id: 'lead-qualification',
@@ -254,7 +276,7 @@ export default function Home() {
 
       {/* Header */}
       <header className="relative z-20 border-b border-slate-200/50 bg-white/80 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -263,37 +285,38 @@ export default function Home() {
             <div className="rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 p-2.5">
               <Workflow className="h-5 w-5 text-white" />
             </div>
-            <span className="font-bold text-lg text-slate-900">COMMARKAI</span>
+            <span className="font-bold text-base sm:text-lg text-slate-900">COMMARKAI</span>
           </motion.div>
           <motion.nav 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="hidden md:flex items-center gap-8"
+            className="hidden md:flex items-center gap-6 lg:gap-8"
           >
             <a href="#about" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">About</a>
             <a href="#skills" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Skills</a>
             <a href="#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Portfolio</a>
+            <a href="#automations" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Automations</a>
             <a href="#contact" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Contact</a>
           </motion.nav>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-20 pb-32 px-6 lg:px-8">
+      <section className="relative z-10 pt-12 sm:pt-16 md:pt-20 pb-20 sm:pb-24 md:pb-32 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-2 text-sm font-medium text-blue-900 mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-blue-900 mb-6 sm:mb-8">
               <Sparkles className="h-4 w-4" />
               Automation Strategist & Operations Specialist
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-900 tracking-tight leading-tight mb-6">
               Ketsia St-Louis Noel
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-10">
+            <p className="text-base sm:text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-10">
               Transforming scattered signals into measurable workflows through AI-assisted automation and strategic operations design.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
@@ -317,7 +340,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative z-10 py-24 px-6 lg:px-8">
+      <section id="about" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -326,7 +349,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
           >
             <Card className="rounded-3xl border-slate-200 bg-white/80 backdrop-blur-sm shadow-xl">
-              <CardContent className="p-8 md:p-12">
+              <CardContent className="p-6 sm:p-8 md:p-12">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 p-3">
                     <Users className="h-6 w-6 text-white" />
@@ -361,16 +384,16 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="relative z-10 py-24 px-6 lg:px-8 bg-slate-900/[0.02]">
+      <section id="skills" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/[0.02]">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Core Skills</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">Core Skills</h2>
+            <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
               A diverse toolkit spanning operations, automation, technical systems, and communication.
             </p>
           </motion.div>
@@ -411,39 +434,48 @@ export default function Home() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="relative z-10 py-24 px-6 lg:px-8">
+      <section id="portfolio" className="relative z-10 py-20 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
             <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-2 text-sm font-medium text-blue-900 mb-6">
               <Workflow className="h-4 w-4" />
               Automation Portfolio
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">From Chaos to Clarity</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">From Chaos to Clarity</h2>
+            <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
               Strategic automation concepts designed to capture data, route work, trigger actions, and generate insights.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-8 items-start">
+          <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-6 lg:gap-8 items-start">
             {/* Automation List */}
-            <div className="space-y-4 lg:sticky lg:top-8">
+            <div className="space-y-3 lg:sticky lg:top-8">
               {automations.map((automation) => (
                 <AutomationCard
                   key={automation.id}
                   automation={automation}
                   active={automation.id === selectedId}
-                  onClick={() => setSelectedId(automation.id)}
+                  onClick={() => {
+                    setSelectedId(automation.id);
+                    // Scroll to detail on mobile
+                    if (window.innerWidth < 1024) {
+                      setTimeout(() => {
+                        document.getElementById('automation-detail')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }, 100);
+                    }
+                  }}
                 />
               ))}
             </div>
 
             {/* Selected Automation Detail */}
             <motion.div
+              id="automation-detail"
               key={selected.id}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -452,26 +484,26 @@ export default function Home() {
             >
               {/* Main Card */}
               <Card className="rounded-3xl border-slate-200 bg-white shadow-xl">
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 p-4 text-white">
-                      <SelectedIcon className="h-7 w-7" />
+                <CardContent className="p-5 sm:p-6 md:p-8">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-6">
+                    <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 p-3 sm:p-4 text-white flex-shrink-0">
+                      <SelectedIcon className="h-6 w-6 sm:h-7 sm:w-7" />
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
                         Automation Concept
                       </span>
-                      <h3 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight">{selected.title}</h3>
-                      <p className="text-base text-slate-600 mt-2 leading-relaxed">{selected.tagline}</p>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 leading-tight">{selected.title}</h3>
+                      <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">{selected.tagline}</p>
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-5 mt-8">
-                    <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5">
+                  <div className="grid md:grid-cols-2 gap-4 sm:gap-5 mt-6">
+                    <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-4 sm:p-5">
                       <h4 className="font-semibold text-sm text-slate-900 mb-2">Problem</h4>
                       <p className="text-sm text-slate-700 leading-relaxed">{selected.problem}</p>
                     </div>
-                    <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-5">
+                    <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-4 sm:p-5">
                       <h4 className="font-semibold text-sm text-slate-900 mb-2">Ideal Audience</h4>
                       <p className="text-sm text-slate-700 leading-relaxed">{selected.audience}</p>
                     </div>
@@ -483,14 +515,14 @@ export default function Home() {
               <N8NWorkflow flow={selected.flow} title={`${selected.title} - Workflow`} />
 
               {/* KPIs and Outputs */}
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
                 <Card className="rounded-2xl border-slate-200 bg-white shadow-sm">
-                  <CardContent className="p-6">
+                  <CardContent className="p-5 sm:p-6">
                     <PillList title="KPIs Tracked" items={selected.kpis} />
                   </CardContent>
                 </Card>
                 <Card className="rounded-2xl border-slate-200 bg-white shadow-sm">
-                  <CardContent className="p-6">
+                  <CardContent className="p-5 sm:p-6">
                     <PillList title="Outputs Generated" items={selected.outputs} />
                   </CardContent>
                 </Card>
@@ -498,9 +530,9 @@ export default function Home() {
 
               {/* Tools & Positioning */}
               <Card className="rounded-2xl border-slate-200 bg-white shadow-sm">
-                <CardContent className="p-6 space-y-6">
+                <CardContent className="p-5 sm:p-6 space-y-6">
                   <PillList title="Possible Tools & Integrations" items={selected.tools} />
-                  <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-5">
+                  <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-4 sm:p-5">
                     <h4 className="font-semibold text-sm text-slate-900 mb-2">Why This Matters</h4>
                     <p className="text-sm text-slate-700 leading-relaxed">{selected.positioning}</p>
                   </div>
@@ -511,23 +543,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Detailed Automations Section */}
+      <DetailedAutomations />
+
       {/* Contact Section */}
-      <section id="contact" className="relative z-10 py-24 px-6 lg:px-8 bg-slate-900/[0.02]">
+      <section id="contact" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/[0.02]">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Let's Work Together</h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <div className="text-center mb-10 md:mb-12">
+              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">Let's Work Together</h2>
+              <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
                 Have a project in mind? Looking to streamline your operations? I'd love to hear from you.
               </p>
             </div>
 
             <Card className="rounded-3xl border-slate-200 bg-white shadow-xl">
-              <CardContent className="p-8 md:p-12">
+              <CardContent className="p-6 sm:p-8 md:p-12">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-2">
@@ -587,7 +622,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-slate-200 bg-white/80 backdrop-blur-sm py-12 px-6 lg:px-8">
+      <footer className="relative z-10 border-t border-slate-200 bg-white/80 backdrop-blur-sm py-8 md:py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
@@ -596,7 +631,7 @@ export default function Home() {
               </div>
               <span className="font-bold text-lg text-slate-900">COMMARKAI</span>
             </div>
-            <p className="text-sm text-slate-600">
+            <p className="text-xs sm:text-sm text-slate-600 text-center">
               © 2025 Ketsia St-Louis Noel. Crafted with precision and purpose.
             </p>
             <div className="flex items-center gap-4">
