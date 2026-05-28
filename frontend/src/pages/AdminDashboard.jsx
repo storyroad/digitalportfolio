@@ -92,7 +92,7 @@ export default function AdminDashboard() {
             <h1 className="text-4xl font-bold text-slate-900">Admin Dashboard</h1>
             <p className="text-slate-600 mt-2">Manage contact form submissions</p>
           </div>
-          <Button onClick={fetchSubmissions} className="rounded-xl">
+          <Button onClick={fetchSubmissions} className="rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-200">
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
           </Button>
@@ -158,35 +158,20 @@ export default function AdminDashboard() {
         </div>
 
         {/* Filters */}
-        <div className="flex items-center gap-3 mb-6">
-          <Button
-            variant={filter === 'all' ? 'default' : 'outline'}
-            onClick={() => setFilter('all')}
-            className="rounded-xl"
-          >
-            All
-          </Button>
-          <Button
-            variant={filter === 'new' ? 'default' : 'outline'}
-            onClick={() => setFilter('new')}
-            className="rounded-xl"
-          >
-            New
-          </Button>
-          <Button
-            variant={filter === 'read' ? 'default' : 'outline'}
-            onClick={() => setFilter('read')}
-            className="rounded-xl"
-          >
-            Read
-          </Button>
-          <Button
-            variant={filter === 'archived' ? 'default' : 'outline'}
-            onClick={() => setFilter('archived')}
-            className="rounded-xl"
-          >
-            Archived
-          </Button>
+        <div className="flex items-center gap-3 mb-6 flex-wrap">
+          {['all', 'new', 'read', 'archived'].map((filterOption) => (
+            <Button
+              key={filterOption}
+              onClick={() => setFilter(filterOption)}
+              className={`rounded-xl capitalize transition-all duration-300 ${
+                filter === filterOption
+                  ? 'bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-200'
+                  : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-blue-200'
+              }`}
+            >
+              {filterOption}
+            </Button>
+          ))}
         </div>
 
         {/* Submissions List */}

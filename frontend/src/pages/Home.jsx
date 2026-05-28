@@ -568,7 +568,7 @@ export default function Home() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
-                      className="rounded-xl border-slate-300 focus:border-amber-500 focus:ring-amber-500 resize-none"
+                      className="rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500 resize-none"
                     />
                   </div>
                   <Button
