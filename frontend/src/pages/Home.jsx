@@ -7,7 +7,7 @@ import {
   LineChart, FolderOpen, MessageSquare, Target, ClipboardList,
   Send, Github, Linkedin, MapPin, Code2, Briefcase, Languages,
   ChevronDown, Settings, ServerCog, GitBranch, Headphones, Menu, X,
-  Cpu, Zap, BookOpen
+  Cpu, Zap, BookOpen, PhoneCall, Mic
 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -604,6 +604,75 @@ export default function Home() {
 
       {/* Detailed Automations Section */}
       <DetailedAutomations />
+
+      {/* AI Voice Assistant Section */}
+      <section id="voice-assistant" className="relative z-10 py-20 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-10 md:mb-12"
+          >
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-[#C09891] mb-3">Live Demo · Try It</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#2A0800] tracking-tight mb-3 leading-tight">
+              AI Voice Assistant
+            </h2>
+            <p className="text-base md:text-lg text-[#775144] max-w-2xl">
+              Capture phone inquiries, structure call details, and trigger follow-up actions. Test it live in your browser or call the assistant directly.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <Card className="rounded-none border border-[#BEA8A7]/40 bg-white shadow-sm">
+              <CardContent className="p-6 sm:p-8 md:p-10">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="rounded-none bg-[#2A0800] p-3 sm:p-4 text-white flex-shrink-0">
+                    <Mic className="h-6 w-6 sm:h-7 sm:w-7" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="inline-block rounded-none border border-[#BEA8A7]/40 bg-[#F4DBD8]/30 px-3 py-1 text-xs font-medium text-[#775144] mb-3 tracking-wide uppercase">
+                      Automation Concept
+                    </span>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#2A0800] tracking-tight leading-tight">
+                      AI Voice Assistant Workflow
+                    </h3>
+                    <p className="text-sm sm:text-base text-[#775144] mt-2 leading-relaxed">
+                      An AI voice assistant answers calls, captures structured information, and routes the request into the next operational step.
+                    </p>
+                  </div>
+                </div>
+
+                {/* CTAs */}
+                <div className="mt-8 pt-6 border-t border-[#BEA8A7]/30 flex flex-col sm:flex-row flex-wrap gap-3">
+                  <a
+                    href="/voice-assistant"
+                    className="inline-flex items-center justify-center gap-2 bg-[#2A0800] hover:bg-[#775144] text-white px-6 py-4 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
+                    data-testid="voice-test-btn"
+                  >
+                    <Mic className="h-4 w-4" />
+                    Test on Website
+                  </a>
+                  <a
+                    href="tel:+18574969001"
+                    aria-label="Call 857-496-9001"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-[#2A0800] text-[#2A0800] hover:bg-[#2A0800] hover:text-white bg-transparent px-6 py-4 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
+                    data-testid="voice-call-btn"
+                  >
+                    <PhoneCall className="h-4 w-4" />
+                    Call 857-496-9001
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Contact Section */}
       <section id="contact" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#F4DBD8]/15">
