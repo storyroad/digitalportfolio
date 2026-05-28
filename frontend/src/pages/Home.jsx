@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, BarChart3, Mail, FileText, Users, Layers, 
-  Sparkles, Workflow, CheckCircle2, Database, Bell, Calendar, 
+  Workflow, CheckCircle2, Database, Bell, Calendar, 
   LineChart, FolderOpen, MessageSquare, Target, ClipboardList,
   Send, Github, Linkedin, MapPin, Code2, Briefcase, Languages,
-  ChevronDown, Settings, ServerCog, GitBranch, Headphones, Menu, X
+  ChevronDown, Settings, ServerCog, GitBranch, Headphones, Menu, X,
+  Cpu, Zap, BookOpen
 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -69,7 +71,7 @@ const automations = [
       'Leads often arrive through forms, DMs, email, referrals, and calls. Without a system, high-intent prospects get delayed, misclassified, or forgotten.',
     flow: [
       { label: 'Lead Captured', icon: MessageSquare, detail: 'Website form, email, DM, ad, referral' },
-      { label: 'Enrich & Summarize', icon: Sparkles, detail: 'AI extracts need, urgency, budget, service fit' },
+      { label: 'Enrich & Summarize', icon: Cpu, detail: 'AI extracts need, urgency, budget, service fit' },
       { label: 'Score Lead', icon: Target, detail: 'Intent, revenue potential, timeline, fit' },
       { label: 'Route to Pipeline', icon: Workflow, detail: 'CRM stage, owner, next action' },
       { label: 'Follow Up', icon: Mail, detail: 'Personalized email, booking link, reminder' },
@@ -90,7 +92,7 @@ const automations = [
       'Important documents often arrive buried in inboxes. Teams waste time renaming files, sorting attachments, forwarding messages, and tracking approvals manually.',
     flow: [
       { label: 'Email Received', icon: Mail, detail: 'Client request, invoice, contract, attachment' },
-      { label: 'Extract Details', icon: Sparkles, detail: 'Sender, document type, due date, client name' },
+      { label: 'Extract Details', icon: Cpu, detail: 'Sender, document type, due date, client name' },
       { label: 'Route File', icon: FolderOpen, detail: 'Save to the correct folder with naming rules' },
       { label: 'Create Task', icon: CheckCircle2, detail: 'Approval, review, reply, payment, upload' },
       { label: 'Generate Summary', icon: FileText, detail: 'Daily digest, missing items, overdue items' },
@@ -111,7 +113,7 @@ const automations = [
       'Sales conversations often fail because the next step is not clear, the CRM is not updated, or follow-up depends on memory instead of process.',
     flow: [
       { label: 'Conversation Logged', icon: MessageSquare, detail: 'Call, meeting, DM, consultation, form response' },
-      { label: 'Next Step Detected', icon: Sparkles, detail: 'AI identifies follow-up need and timeline' },
+      { label: 'Next Step Detected', icon: Cpu, detail: 'AI identifies follow-up need and timeline' },
       { label: 'CRM Updated', icon: Database, detail: 'Stage, notes, contact status, value' },
       { label: 'Reminder Triggered', icon: Bell, detail: 'Follow-up date, task owner, priority' },
       { label: 'Pipeline Reported', icon: LineChart, detail: 'Open deals, stalled leads, next actions' },
@@ -126,13 +128,13 @@ const automations = [
     id: 'content-marketing',
     title: 'Content & Marketing Automation',
     tagline: 'Transform one idea into reusable content assets, distribution tasks, and performance insights.',
-    icon: Sparkles,
+    icon: BookOpen,
     audience: 'Founders, creators, agencies, e-commerce brands, coaches, community builders',
     problem:
       'Marketing content takes too long when every platform is handled manually. Ideas get lost, publishing is inconsistent, and performance data is rarely connected back to strategy.',
     flow: [
       { label: 'Idea Captured', icon: FileText, detail: 'Topic, audience, offer, keyword, hook' },
-      { label: 'AI Drafts Assets', icon: Sparkles, detail: 'Blog, LinkedIn, Pinterest, email, captions' },
+      { label: 'AI Drafts Assets', icon: Cpu, detail: 'Blog, LinkedIn, Pinterest, email, captions' },
       { label: 'Review Queue', icon: CheckCircle2, detail: 'Human approval, edits, brand voice' },
       { label: 'Schedule & Publish', icon: Calendar, detail: 'Platform-specific timing and formats' },
       { label: 'Measure Performance', icon: BarChart3, detail: 'Clicks, saves, leads, conversions, content themes' },
@@ -152,7 +154,7 @@ const skills = [
     items: ['Incident coordination', 'Escalation management', 'Service reporting', 'Stakeholder communications', 'Process documentation', 'Cross-functional support']
   },
   {
-    icon: Sparkles,
+    icon: Cpu,
     title: 'AI Automation & Business Systems',
     items: ['Workflow design', 'Automation strategy', 'CRM workflows', 'Lead qualification flows', 'Reporting workflows', 'SOP design']
   },
@@ -175,21 +177,21 @@ function AutomationCard({ automation, active, onClick }) {
       onClick={onClick}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
-      className={`w-full text-left rounded-2xl border p-5 transition-all duration-300 ${
+      className={`w-full text-left rounded-none border p-5 transition-all duration-300 ${
         active 
-          ? 'border-blue-200 bg-blue-50/50 shadow-lg shadow-blue-100' 
-          : 'border-slate-200 bg-white hover:border-blue-100 hover:shadow-md'
+          ? 'border-[#2A0800] bg-[#F4DBD8]/30 shadow-md' 
+          : 'border-[#BEA8A7]/40 bg-white hover:border-[#775144]/60 hover:shadow-sm'
       }`}
     >
       <div className="flex items-start gap-4">
-        <div className={`rounded-xl p-3 ${
-          active ? 'bg-gradient-to-br from-blue-600 to-cyan-600 text-white' : 'bg-slate-50 text-slate-700'
+        <div className={`rounded-none p-3 ${
+          active ? 'bg-[#2A0800] text-white' : 'bg-[#F4DBD8]/40 text-[#775144]'
         }`}>
           <Icon className="h-5 w-5" />
         </div>
         <div className="flex-1">
-          <h3 className="font-semibold text-base text-slate-900 leading-tight">{automation.title}</h3>
-          <p className="text-sm text-slate-600 mt-1.5 leading-relaxed">{automation.tagline}</p>
+          <h3 className="font-semibold text-base text-[#2A0800] leading-tight tracking-tight">{automation.title}</h3>
+          <p className="text-sm text-[#775144] mt-1.5 leading-relaxed">{automation.tagline}</p>
         </div>
       </div>
     </motion.button>
@@ -229,10 +231,10 @@ function FlowStep({ step, index }) {
 function PillList({ title, items }) {
   return (
     <div>
-      <h4 className="font-semibold text-sm text-slate-900 mb-3">{title}</h4>
+      <h4 className="font-semibold text-sm text-[#2A0800] mb-3 tracking-tight">{title}</h4>
       <div className="flex flex-wrap gap-2">
         {items.map((item, idx) => (
-          <span key={idx} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-700">
+          <span key={idx} className="rounded-none border border-[#BEA8A7]/40 bg-[#F4DBD8]/30 px-3 py-1.5 text-xs text-[#775144]">
             {item}
           </span>
         ))}
@@ -246,6 +248,7 @@ export default function Home() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
   
   const selected = automations.find((item) => item.id === selectedId);
   const SelectedIcon = selected.icon;
@@ -267,46 +270,53 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-      {/* Decorative Elements */}
+    <div className="min-h-screen bg-gradient-to-br from-[#F4DBD8]/20 via-white to-[#F4DBD8]/10">
+      {/* Decorative Elements - subtle */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200/20 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 -left-40 w-96 h-96 bg-cyan-200/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-sky-200/15 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#F4DBD8]/40 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 -left-40 w-96 h-96 bg-[#BEA8A7]/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#C09891]/15 rounded-full blur-3xl" />
       </div>
 
       {/* Header */}
-      <header className="relative z-20 border-b border-slate-200/50 bg-white/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-20 border-b border-[#BEA8A7]/30 bg-white/90 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-2"
           >
-            <div className="rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 p-2.5">
+            <div className="rounded-xl bg-gradient-to-br from-[#775144] to-[#2A0800] p-2.5">
               <Workflow className="h-5 w-5 text-white" />
             </div>
-            <span className="font-bold text-base sm:text-lg text-slate-900">COMMARKAI</span>
+            <span className="font-bold text-base sm:text-lg text-[#2A0800] tracking-tight">COMMARKAI</span>
           </motion.div>
           <motion.nav 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             className="hidden md:flex items-center gap-6 lg:gap-8"
           >
-            <a href="#about" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">About</a>
-            <a href="#skills" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Skills</a>
-            <a href="#portfolio" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Portfolio</a>
-            <a href="#automations" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Automations</a>
-            <a href="#contact" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Contact</a>
+            <a href="#about" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">About</a>
+            <a href="#skills" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Skills</a>
+            <a href="#portfolio" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Portfolio</a>
+            <a href="#automations" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Automations</a>
+            <a href="#contact" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Contact</a>
+            <button 
+              onClick={() => navigate('/resume')}
+              className="text-sm font-semibold text-[#2A0800] hover:text-[#775144] transition-colors border-b-2 border-[#2A0800] hover:border-[#775144] pb-0.5"
+              data-testid="nav-resume-btn"
+            >
+              Resume
+            </button>
           </motion.nav>
           
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden rounded-lg p-2 hover:bg-slate-100 transition-colors"
+            className="md:hidden rounded-lg p-2 hover:bg-[#F4DBD8]/40 transition-colors"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="h-5 w-5 text-slate-700" /> : <Menu className="h-5 w-5 text-slate-700" />}
+            {mobileMenuOpen ? <X className="h-5 w-5 text-[#2A0800]" /> : <Menu className="h-5 w-5 text-[#2A0800]" />}
           </button>
         </div>
         
@@ -315,7 +325,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden border-t border-slate-200/50 bg-white/95 backdrop-blur-xl"
+            className="md:hidden border-t border-[#BEA8A7]/30 bg-white/95 backdrop-blur-xl"
           >
             <div className="px-4 py-3 space-y-1">
               {[
@@ -329,46 +339,61 @@ export default function Home() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-[#775144] hover:bg-[#F4DBD8]/40 hover:text-[#2A0800] transition-colors"
                 >
                   {item.label}
                 </a>
               ))}
+              <button
+                onClick={() => { setMobileMenuOpen(false); navigate('/resume'); }}
+                className="w-full text-left block px-3 py-2 rounded-lg text-sm font-semibold text-[#2A0800] bg-[#F4DBD8]/40 hover:bg-[#F4DBD8]/60 transition-colors"
+              >
+                View Resume →
+              </button>
             </div>
           </motion.div>
         )}
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-12 sm:pt-16 md:pt-20 pb-20 sm:pb-24 md:pb-32 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="relative z-10 pt-16 sm:pt-20 md:pt-28 pb-20 sm:pb-24 md:pb-32 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="text-center"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-blue-900 mb-6 sm:mb-8">
-              <Sparkles className="h-4 w-4" />
-              Automation Strategist & Operations Specialist
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-900 tracking-tight leading-tight mb-6">
-              Ketsia St-Louis Noel
+            {/* Subtle eyebrow text - no border, no icon */}
+            <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.3em] text-[#C09891] mb-5 sm:mb-6">
+              Automation Strategist · Operations Specialist
+            </p>
+            
+            {/* Name - more balanced size */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#2A0800] tracking-tight leading-[1.05] mb-6">
+              Ketsia <span className="block sm:inline">St-Louis Noel</span>
             </h1>
-            <p className="text-base sm:text-xl md:text-2xl text-slate-600 leading-relaxed max-w-3xl mx-auto mb-8 sm:mb-10">
+            
+            {/* Tagline */}
+            <p className="text-base sm:text-lg md:text-xl text-[#775144] leading-relaxed max-w-2xl mx-auto mb-10">
               Transforming scattered signals into measurable workflows through AI-assisted automation and strategic operations design.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            
+            {/* CTAs - sleek corporate style */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <Button 
-                onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 px-8 py-6 text-base font-semibold shadow-lg shadow-blue-200 transition-all duration-300"
+                onClick={() => navigate('/resume')}
+                data-testid="hero-resume-btn"
+                className="w-full sm:w-auto rounded-none bg-[#2A0800] hover:bg-[#775144] text-white px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
               >
-                Let's Connect
-                <ArrowRight className="ml-2 h-5 w-5" />
+                View Resume
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <Button 
                 variant="outline"
                 onClick={() => document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' })}
-                className="rounded-full border-2 border-slate-300 px-8 py-6 text-base font-semibold hover:border-slate-400 transition-all duration-300"
+                data-testid="hero-portfolio-btn"
+                className="w-full sm:w-auto rounded-none border-2 border-[#2A0800] text-[#2A0800] hover:bg-[#2A0800] hover:text-white bg-transparent px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
               >
                 View Portfolio
               </Button>
@@ -386,17 +411,15 @@ export default function Home() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <Card className="rounded-3xl border-slate-200 bg-white/80 backdrop-blur-sm shadow-xl">
+            <div className="mb-10">
+              <p className="text-xs font-mono uppercase tracking-[0.3em] text-[#C09891] mb-3">01 · About</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#2A0800] tracking-tight">A systems thinker for modern operations.</h2>
+            </div>
+            <Card className="rounded-none border border-[#BEA8A7]/40 bg-white shadow-sm">
               <CardContent className="p-6 sm:p-8 md:p-12">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 p-3">
-                    <Users className="h-6 w-6 text-white" />
-                  </div>
-                  <h2 className="text-3xl font-bold text-slate-900">About</h2>
-                </div>
-                <div className="space-y-4 text-slate-700 leading-relaxed">
-                  <p className="text-lg">
-                    I specialize in bridging the gap between scattered operational signals and clear, measurable business workflows. With expertise spanning <span className="font-semibold text-slate-900">incident management</span>, <span className="font-semibold text-slate-900">AI automation strategy</span>, and <span className="font-semibold text-slate-900">enterprise service delivery</span>, I help teams move from reactive chaos to proactive coordination.
+                <div className="space-y-4 text-[#775144] leading-relaxed">
+                  <p className="text-base md:text-lg">
+                    I specialize in bridging the gap between scattered operational signals and clear, measurable business workflows. With expertise spanning <span className="font-semibold text-[#2A0800]">incident management</span>, <span className="font-semibold text-[#2A0800]">AI automation strategy</span>, and <span className="font-semibold text-[#2A0800]">enterprise service delivery</span>, I help teams move from reactive chaos to proactive coordination.
                   </p>
                   <p>
                     My approach combines technical precision with human-centered communication — whether it's designing CRM workflows that actually get used, building incident escalation paths that protect SLAs, or creating AI-assisted systems that save hours without losing the personal touch.
@@ -405,14 +428,14 @@ export default function Home() {
                     From coordinating enterprise-level incidents to mapping lead qualification flows for growing businesses, I bring both systems thinking and practical implementation to every project.
                   </p>
                 </div>
-                <div className="flex flex-wrap items-center gap-6 mt-8 pt-8 border-t border-slate-200">
-                  <div className="flex items-center gap-2 text-slate-600">
+                <div className="flex flex-wrap items-center gap-6 mt-8 pt-8 border-t border-[#BEA8A7]/30">
+                  <div className="flex items-center gap-2 text-[#775144]">
                     <MapPin className="h-4 w-4" />
                     <span className="text-sm">Remote</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-600">
+                  <div className="flex items-center gap-2 text-[#775144]">
                     <Languages className="h-4 w-4" />
-                    <span className="text-sm">English / French</span>
+                    <span className="text-sm">English · French</span>
                   </div>
                 </div>
               </CardContent>
@@ -422,16 +445,17 @@ export default function Home() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/[0.02]">
+      <section id="skills" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#F4DBD8]/15">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12 md:mb-16"
+            className="mb-12 md:mb-16"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">Core Skills</h2>
-            <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-[#C09891] mb-3">02 · Expertise</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#2A0800] tracking-tight mb-3">Core Skills</h2>
+            <p className="text-base md:text-lg text-[#775144] max-w-2xl">
               A diverse toolkit spanning operations, automation, technical systems, and communication.
             </p>
           </motion.div>
@@ -447,17 +471,17 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <Card className="rounded-2xl border-slate-200 bg-white shadow-sm hover:shadow-lg transition-all duration-300 h-full">
+                  <Card className="rounded-none border border-[#BEA8A7]/40 bg-white shadow-sm hover:shadow-md hover:border-[#775144]/40 transition-all duration-300 h-full">
                     <CardContent className="p-6">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 p-2.5">
+                        <div className="rounded-none bg-[#2A0800] p-2.5">
                           <SkillIcon className="h-5 w-5 text-white" />
                         </div>
-                        <h3 className="text-lg font-semibold text-slate-900">{skill.title}</h3>
+                        <h3 className="text-lg font-semibold text-[#2A0800] tracking-tight">{skill.title}</h3>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         {skill.items.map((item, itemIdx) => (
-                          <span key={itemIdx} className="text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5">
+                          <span key={itemIdx} className="text-sm text-[#775144] bg-[#F4DBD8]/40 border border-[#BEA8A7]/30 rounded-none px-3 py-1.5">
                             {item}
                           </span>
                         ))}
@@ -478,14 +502,11 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12 md:mb-16"
+            className="mb-12 md:mb-16"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/50 px-4 py-2 text-sm font-medium text-blue-900 mb-6">
-              <Workflow className="h-4 w-4" />
-              Automation Portfolio
-            </div>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">From Chaos to Clarity</h2>
-            <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-[#C09891] mb-3">03 · Portfolio</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#2A0800] tracking-tight leading-tight mb-3">From Chaos to Clarity</h2>
+            <p className="text-base md:text-lg text-[#775144] max-w-2xl">
               Strategic automation concepts designed to capture data, route work, trigger actions, and generate insights.
             </p>
           </motion.div>
@@ -521,29 +542,29 @@ export default function Home() {
               className="space-y-6"
             >
               {/* Main Card */}
-              <Card className="rounded-3xl border-slate-200 bg-white shadow-xl">
+              <Card className="rounded-none border border-[#BEA8A7]/40 bg-white shadow-sm">
                 <CardContent className="p-5 sm:p-6 md:p-8">
                   <div className="flex items-start gap-3 sm:gap-4 mb-6">
-                    <div className="rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 p-3 sm:p-4 text-white flex-shrink-0">
+                    <div className="rounded-none bg-[#2A0800] p-3 sm:p-4 text-white flex-shrink-0">
                       <SelectedIcon className="h-6 w-6 sm:h-7 sm:w-7" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="inline-block rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 mb-3">
+                      <span className="inline-block rounded-none border border-[#BEA8A7]/40 bg-[#F4DBD8]/30 px-3 py-1 text-xs font-medium text-[#775144] mb-3 tracking-wide uppercase">
                         Automation Concept
                       </span>
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 leading-tight">{selected.title}</h3>
-                      <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">{selected.tagline}</p>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#2A0800] tracking-tight leading-tight">{selected.title}</h3>
+                      <p className="text-sm sm:text-base text-[#775144] mt-2 leading-relaxed">{selected.tagline}</p>
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4 sm:gap-5 mt-6">
-                    <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-4 sm:p-5">
-                      <h4 className="font-semibold text-sm text-slate-900 mb-2">Problem</h4>
-                      <p className="text-sm text-slate-700 leading-relaxed">{selected.problem}</p>
+                    <div className="rounded-none border border-[#BEA8A7]/40 bg-[#F4DBD8]/20 p-4 sm:p-5">
+                      <h4 className="font-semibold text-sm text-[#2A0800] mb-2 tracking-tight">Problem</h4>
+                      <p className="text-sm text-[#775144] leading-relaxed">{selected.problem}</p>
                     </div>
-                    <div className="rounded-2xl border border-slate-200 bg-slate-50/50 p-4 sm:p-5">
-                      <h4 className="font-semibold text-sm text-slate-900 mb-2">Ideal Audience</h4>
-                      <p className="text-sm text-slate-700 leading-relaxed">{selected.audience}</p>
+                    <div className="rounded-none border border-[#BEA8A7]/40 bg-[#F4DBD8]/20 p-4 sm:p-5">
+                      <h4 className="font-semibold text-sm text-[#2A0800] mb-2 tracking-tight">Ideal Audience</h4>
+                      <p className="text-sm text-[#775144] leading-relaxed">{selected.audience}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -554,12 +575,12 @@ export default function Home() {
 
               {/* KPIs and Outputs */}
               <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
-                <Card className="rounded-2xl border-slate-200 bg-white shadow-sm">
+                <Card className="rounded-none border border-[#BEA8A7]/40 bg-white shadow-sm">
                   <CardContent className="p-5 sm:p-6">
                     <PillList title="KPIs Tracked" items={selected.kpis} />
                   </CardContent>
                 </Card>
-                <Card className="rounded-2xl border-slate-200 bg-white shadow-sm">
+                <Card className="rounded-none border border-[#BEA8A7]/40 bg-white shadow-sm">
                   <CardContent className="p-5 sm:p-6">
                     <PillList title="Outputs Generated" items={selected.outputs} />
                   </CardContent>
@@ -567,12 +588,12 @@ export default function Home() {
               </div>
 
               {/* Tools & Positioning */}
-              <Card className="rounded-2xl border-slate-200 bg-white shadow-sm">
+              <Card className="rounded-none border border-[#BEA8A7]/40 bg-white shadow-sm">
                 <CardContent className="p-5 sm:p-6 space-y-6">
                   <PillList title="Possible Tools & Integrations" items={selected.tools} />
-                  <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-4 sm:p-5">
-                    <h4 className="font-semibold text-sm text-slate-900 mb-2">Why This Matters</h4>
-                    <p className="text-sm text-slate-700 leading-relaxed">{selected.positioning}</p>
+                  <div className="rounded-none border-l-4 border-[#2A0800] bg-[#F4DBD8]/20 p-4 sm:p-5">
+                    <h4 className="font-semibold text-sm text-[#2A0800] mb-2 tracking-tight">Why This Matters</h4>
+                    <p className="text-sm text-[#775144] leading-relaxed">{selected.positioning}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -585,25 +606,26 @@ export default function Home() {
       <DetailedAutomations />
 
       {/* Contact Section */}
-      <section id="contact" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/[0.02]">
+      <section id="contact" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#F4DBD8]/15">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="text-center mb-10 md:mb-12">
-              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">Let's Work Together</h2>
-              <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
+            <div className="mb-10 md:mb-12">
+              <p className="text-xs font-mono uppercase tracking-[0.3em] text-[#C09891] mb-3">04 · Contact</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#2A0800] tracking-tight leading-tight mb-3">Let's work together.</h2>
+              <p className="text-base md:text-lg text-[#775144] max-w-2xl">
                 Have a project in mind? Looking to streamline your operations? I'd love to hear from you.
               </p>
             </div>
 
-            <Card className="rounded-3xl border-slate-200 bg-white shadow-xl">
+            <Card className="rounded-none border border-[#BEA8A7]/40 bg-white shadow-sm">
               <CardContent className="p-6 sm:p-8 md:p-12">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-2">
+                    <label htmlFor="name" className="block text-xs font-semibold text-[#2A0800] mb-2 tracking-wide uppercase">
                       Name
                     </label>
                     <Input
@@ -613,11 +635,12 @@ export default function Home() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                      data-testid="contact-name-input"
+                      className="rounded-none border-[#BEA8A7]/50 border-2 focus:border-[#2A0800] focus:ring-0 bg-white text-[#2A0800] placeholder:text-[#C09891]"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-2">
+                    <label htmlFor="email" className="block text-xs font-semibold text-[#2A0800] mb-2 tracking-wide uppercase">
                       Email
                     </label>
                     <Input
@@ -627,11 +650,12 @@ export default function Home() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500"
+                      data-testid="contact-email-input"
+                      className="rounded-none border-[#BEA8A7]/50 border-2 focus:border-[#2A0800] focus:ring-0 bg-white text-[#2A0800] placeholder:text-[#C09891]"
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-semibold text-slate-900 mb-2">
+                    <label htmlFor="message" className="block text-xs font-semibold text-[#2A0800] mb-2 tracking-wide uppercase">
                       Message
                     </label>
                     <Textarea
@@ -641,16 +665,18 @@ export default function Home() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
-                      className="rounded-xl border-slate-300 focus:border-blue-500 focus:ring-blue-500 resize-none"
+                      data-testid="contact-message-input"
+                      className="rounded-none border-[#BEA8A7]/50 border-2 focus:border-[#2A0800] focus:ring-0 bg-white text-[#2A0800] placeholder:text-[#C09891] resize-none"
                     />
                   </div>
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 py-6 text-base font-semibold shadow-lg shadow-blue-200 transition-all duration-300"
+                    data-testid="contact-submit-btn"
+                    className="w-full rounded-none bg-[#2A0800] hover:bg-[#775144] text-white py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
-                    <Send className="ml-2 h-5 w-5" />
+                    <Send className="ml-2 h-4 w-4" />
                   </Button>
                 </form>
               </CardContent>
@@ -660,26 +686,26 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-slate-200 bg-white/80 backdrop-blur-sm py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="relative z-10 border-t border-[#BEA8A7]/30 bg-white py-10 md:py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
-              <div className="rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 p-2.5">
+              <div className="rounded-xl bg-gradient-to-br from-[#775144] to-[#2A0800] p-2.5">
                 <Workflow className="h-5 w-5 text-white" />
               </div>
-              <span className="font-bold text-lg text-slate-900">COMMARKAI</span>
+              <span className="font-bold text-lg text-[#2A0800] tracking-tight">COMMARKAI</span>
             </div>
-            <p className="text-xs sm:text-sm text-slate-600 text-center">
-              © 2025 Ketsia St-Louis Noel. Crafted with precision and purpose.
+            <p className="text-xs sm:text-sm text-[#775144] text-center">
+              © 2025 Ketsia St-Louis Noel · Crafted with precision and purpose.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">
+              <a href="#" className="text-[#775144] hover:text-[#2A0800] transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">
+              <a href="#" className="text-[#775144] hover:text-[#2A0800] transition-colors">
                 <Github className="h-5 w-5" />
               </a>
-              <a href="#" className="text-slate-600 hover:text-blue-600 transition-colors">
+              <a href="mailto:ketsiasln@gmail.com" className="text-[#775144] hover:text-[#2A0800] transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>

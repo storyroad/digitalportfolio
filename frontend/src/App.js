@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from './components/ui/sonner';
 import Home from './pages/Home';
 import AdminDashboard from './pages/AdminDashboard';
+import Resume from './pages/Resume';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/resume" element={<Resume />} />
         </Routes>
       </BrowserRouter>
       <Toaster position="top-right" richColors />
