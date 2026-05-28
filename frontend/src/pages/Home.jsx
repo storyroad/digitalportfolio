@@ -13,6 +13,7 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { toast } from 'sonner';
 import { handleContactSubmit } from '../utils/mock';
+import N8NWorkflow from '../components/N8NWorkflow';
 
 const automations = [
   {
@@ -478,20 +479,8 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              {/* Workflow Steps */}
-              <Card className="rounded-3xl border-slate-200 bg-white shadow-xl">
-                <CardContent className="p-8">
-                  <div className="mb-6">
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">Workflow Logic</h3>
-                    <p className="text-sm text-slate-600">Step-by-step automation flow from trigger to outcome</p>
-                  </div>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-                    {selected.flow.map((step, index) => (
-                      <FlowStep key={step.label} step={step} index={index} />
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Visual N8N-style Workflow */}
+              <N8NWorkflow flow={selected.flow} title={`${selected.title} - Workflow`} />
 
               {/* KPIs and Outputs */}
               <div className="grid md:grid-cols-2 gap-6">
