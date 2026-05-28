@@ -5,7 +5,7 @@ import {
   Sparkles, Workflow, CheckCircle2, Database, Bell, Calendar, 
   LineChart, FolderOpen, MessageSquare, Target, ClipboardList,
   Send, Github, Linkedin, MapPin, Code2, Briefcase, Languages,
-  ChevronDown, Settings, ServerCog, GitBranch, Headphones
+  ChevronDown, Settings, ServerCog, GitBranch, Headphones, Menu, X
 } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -245,6 +245,7 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState(automations[0].id);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const selected = automations.find((item) => item.id === selectedId);
   const SelectedIcon = selected.icon;
@@ -298,7 +299,44 @@ export default function Home() {
             <a href="#automations" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Automations</a>
             <a href="#contact" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">Contact</a>
           </motion.nav>
+          
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden rounded-lg p-2 hover:bg-slate-100 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5 text-slate-700" /> : <Menu className="h-5 w-5 text-slate-700" />}
+          </button>
         </div>
+        
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden border-t border-slate-200/50 bg-white/95 backdrop-blur-xl"
+          >
+            <div className="px-4 py-3 space-y-1">
+              {[
+                { href: '#about', label: 'About' },
+                { href: '#skills', label: 'Skills' },
+                { href: '#portfolio', label: 'Portfolio' },
+                { href: '#automations', label: 'Automations' },
+                { href: '#contact', label: 'Contact' }
+              ].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </header>
 
       {/* Hero Section */}
