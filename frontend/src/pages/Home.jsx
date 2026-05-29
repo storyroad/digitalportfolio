@@ -374,13 +374,13 @@ export default function Home() {
               Ketsia <span className="block sm:inline">St-Louis Noel</span>
             </h1>
             
-            {/* Tagline */}
+                        {/* Tagline */}
             <p className="text-base sm:text-lg md:text-xl text-[#775144] leading-relaxed max-w-2xl mx-auto mb-10">
               Transforming scattered signals into measurable workflows through AI-assisted automation and strategic operations design.
             </p>
-            
+
             {/* CTAs - sleek corporate style */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap">
               <Button 
                 onClick={() => navigate('/resume')}
                 data-testid="hero-resume-btn"
@@ -389,13 +389,23 @@ export default function Home() {
                 View Resume
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+
               <Button 
                 variant="outline"
-                onClick={() => document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
                 data-testid="hero-portfolio-btn"
                 className="w-full sm:w-auto rounded-none border-2 border-[#2A0800] text-[#2A0800] hover:bg-[#2A0800] hover:text-white bg-transparent px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
               >
                 View Portfolio
+              </Button>
+
+              <Button
+                onClick={() => navigate('/voice-assistant')}
+                data-testid="hero-voice-assistant-btn"
+                className="w-full sm:w-auto rounded-none bg-[#3D9B6D] hover:bg-[#2f7f59] text-white px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
+              >
+                <Mic className="mr-2 h-4 w-4" />
+                Test AI Voice Assistant
               </Button>
             </div>
           </motion.div>
