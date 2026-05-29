@@ -379,34 +379,36 @@ export default function Home() {
               Transforming scattered signals into measurable workflows through AI-assisted automation and strategic operations design.
             </p>
 
-            {/* CTAs - sleek corporate style */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 flex-wrap">
-              <Button 
-                onClick={() => navigate('/resume')}
-                data-testid="hero-resume-btn"
-                className="w-full sm:w-auto rounded-none bg-[#2A0800] hover:bg-[#775144] text-white px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
-              >
-                View Resume
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                        {/* CTAs - primary and secondary */}
+            <div className="flex flex-col items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                <Button 
+                  onClick={() => navigate('/resume')}
+                  data-testid="hero-resume-btn"
+                  className="w-full sm:w-auto rounded-none bg-[#2A0800] hover:bg-[#775144] text-white px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
+                >
+                  View Resume
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
 
-              <Button 
-                variant="outline"
-                onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                data-testid="hero-portfolio-btn"
-                className="w-full sm:w-auto rounded-none border-2 border-[#2A0800] text-[#2A0800] hover:bg-[#2A0800] hover:text-white bg-transparent px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
-              >
-                View Portfolio
-              </Button>
+                <Button 
+                  variant="outline"
+                  onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+                  data-testid="hero-portfolio-btn"
+                  className="w-full sm:w-auto rounded-none border-2 border-[#2A0800] text-[#2A0800] hover:bg-[#2A0800] hover:text-white bg-transparent px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
+                >
+                  View Portfolio
+                </Button>
+              </div>
 
-              <Button
+              <button
                 onClick={() => navigate('/voice-assistant')}
                 data-testid="hero-voice-assistant-btn"
-                className="w-full sm:w-auto rounded-none bg-[#3D9B6D] hover:bg-[#2f7f59] text-white px-8 py-6 text-sm font-semibold tracking-wide uppercase transition-all duration-300"
+                className="inline-flex items-center gap-2 border-b border-[#3D9B6D]/40 pb-1 text-sm font-semibold uppercase tracking-wide text-[#3D9B6D] transition hover:border-[#2f7f59] hover:text-[#2f7f59]"
               >
-                <Mic className="mr-2 h-4 w-4" />
+                <Mic className="h-4 w-4" />
                 Test AI Voice Assistant
-              </Button>
+              </button>
             </div>
           </motion.div>
         </div>
