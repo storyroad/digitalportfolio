@@ -300,7 +300,7 @@ export default function Home() {
             <a href="#skills" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Skills</a>
             <a href="#portfolio" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Portfolio</a>
             <a href="#automations" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Automations</a>
-            <a href="#contact" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Contact</a>
+            <a href="#contact form" className="text-sm font-medium text-[#775144] hover:text-[#2A0800] transition-colors">Contact Form</a>
             <button 
               onClick={() => navigate('/resume')}
               className="text-sm font-semibold text-[#2A0800] hover:text-[#775144] transition-colors border-b-2 border-[#2A0800] hover:border-[#775144] pb-0.5"
@@ -333,7 +333,7 @@ export default function Home() {
                 { href: '#skills', label: 'Skills' },
                 { href: '#portfolio', label: 'Portfolio' },
                 { href: '#automations', label: 'Automations' },
-                { href: '#contact', label: 'Contact' }
+                { href: '#contact form', label: 'Contact Form' }
               ].map((item) => (
                 <a
                   key={item.href}
@@ -686,8 +686,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#F4DBD8]/15">
+      {/* Contact Form Section */}
+      <section id="contact form" className="relative z-10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[#F4DBD8]/15">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
