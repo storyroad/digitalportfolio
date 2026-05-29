@@ -14,7 +14,6 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { toast } from 'sonner';
-import { handleContactSubmit } from '../utils/mock';
 import N8NWorkflow from '../components/N8NWorkflow';
 import DetailedAutomations from '../components/DetailedAutomations';
 
@@ -256,17 +255,27 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    const result = await handleContactSubmit(formData);
-    
-    if (result.success) {
-      toast.success('Message sent successfully! I\'ll get back to you soon.');
+  
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+  
+      toast.success("Message sent successfully! I'll get back to you soon.");
       setFormData({ name: '', email: '', message: '' });
-    } else {
+    } catch (error) {
       toast.error('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    setIsSubmitting(false);
   };
 
   return (
