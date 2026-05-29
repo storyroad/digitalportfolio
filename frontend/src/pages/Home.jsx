@@ -257,7 +257,7 @@ export default function Home() {
     setIsSubmitting(true);
   
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+      const response = await fetch(`https://digitalportfolio-backend.onrender.com/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
